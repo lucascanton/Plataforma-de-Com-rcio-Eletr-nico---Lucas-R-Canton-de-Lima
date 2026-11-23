@@ -6,7 +6,7 @@ ARQUIVO = "dados_sistema.txt"
 def ler(mensagem):
     return input(mensagem).strip() # LÊ A MENSAGEM SE ESPAÇO
 
-def formato_preco(valor):
+def formatar_preco(valor): # transforma o número em dinheiro, ex: 50.5 vira R$ 50,50
     return "R$ " +f"{valor:.2f}".replace(".", ",")
 
 #criação das estruturas vazias
@@ -53,7 +53,7 @@ def exibir_arvore(no, nivel):
         #função recursiva -> lista os nós da arvore descendo os niveis até não ter filhos
 
 def renomear_no():
-    caminho = pedir_caminho(...)
+    caminho = pedir_caminho("Caminho do nó a renomear: ") # antes tava sem a mensagem
     if len(caminho) == 0 or navegar(caminho) is None:
         print("Nó não encontrado.")
         return
