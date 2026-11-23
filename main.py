@@ -34,7 +34,7 @@ def navegar(caminho):
             return None
         no = no[nome]
     return no
-    # não entendi
+    # le o nó, se tiver vazio cria um novo, se não retorna o nó que já tem
 
 def inserir_no():
     caminhoPai = pedir_caminho("Pai (vazio para criar um categoria)") # vazio = raiz
@@ -53,7 +53,7 @@ def exibir_arvore(no, nivel):
         #função recursiva -> lista os nós da arvore descendo os niveis até não ter filhos
 
 def renomear_no():
-    caminho = pedir_caminho("Caminho do nó a renomear: ") # antes tava sem a mensagem
+    caminho = pedir_caminho("Caminho do nó a renomear (ex: Eletronico > Celulares): ") # precisa do caminho inteiro, desde a raiz
     if len(caminho) == 0 or navegar(caminho) is None:
         print("Nó não encontrado.")
         return
@@ -63,7 +63,7 @@ def renomear_no():
     print("Nó renomeado.")
 
 def remover_no():
-    caminho = pedir_caminho("Caminho do nó a remover: ")
+    caminho = pedir_caminho("Caminho do nó a remover (ex: Eletronico > Celulares): ")
     if len(caminho) == 0 or navegar(caminho) is None:
         print("Nó não encontrado.")
         return
@@ -207,19 +207,6 @@ def listar_carrinho():
     print("Total:", formatar_preco(calcular_total()))
 
 
-def trocar_topo():
-    if len(pilha) == 0:
-        print("Carrinho vazio.")
-        return
-    novo = ler("Código do novo produto para o topo: ")
-    produto = buscar_produto(novo)
-    if produto is None:
-        print("Produto não encontrado.")
-        return
-    pilha[-1] = novo  # [-1] é o topo
-    print("Topo trocado por", produto[1])
-
-
 def desfazer_acao():
     if len(pilha) == 0:
         print("Carrinho vazio.")
@@ -245,17 +232,15 @@ def finalizar_compra():
 def menu_carrinho():
     while True:
         print("\n--- CARRINHO (Pilha) ---")
-        print("1-Adicionar produto  2-Ver carrinho  3-Trocar o topo  4-Desfazer última ação  5-Finalizar compra  0-Voltar")
+        print("1-Adicionar produto  2-Ver carrinho  3-Desfazer última ação  4-Finalizar compra  0-Voltar")
         op = ler("Opção: ")
         if op == "1":
             adicionar_ao_carrinho()
         elif op == "2":
             listar_carrinho()
         elif op == "3":
-            trocar_topo()
-        elif op == "4":
             desfazer_acao()
-        elif op == "5":
+        elif op == "4":
             finalizar_compra()
         elif op == "0":
             break
@@ -270,7 +255,7 @@ def listar_fila():
     posicao = 1
     for p in fila:
         print(str(posicao) + "º - Pedido", p[0], "-", p[1], "-", formatar_preco(p[2]), "-", len(p[3]), "item(ns)")
-        posicao = posicao + 1
+        posicao += 1
 
 
 def listar_historico():
